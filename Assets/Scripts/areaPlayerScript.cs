@@ -4,31 +4,51 @@ using UnityEngine;
 
 public class areaPlayerScript : MonoBehaviour
 {
-    int[,] location = { { 0 }, { 0 } };
+    public float upOrDown = 0;
+    public float leftOrRight = 0;
+    public bool go=false;
+
     private playerCameraScript playerCameraScript;
+    private moveCamera moveCamera;
     // Start is called before the first frame update
     void Start()
     {
         playerCameraScript = FindObjectOfType<playerCameraScript>();
+        moveCamera = FindObjectOfType<moveCamera>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
     public void locationChange(string direction)
     {
         switch (direction)
         {
             case "Up":
+                upOrDown++;
                 break;
             case "Down":
+                upOrDown--;
                 break;
             case "Right":
+                leftOrRight++;
                 break;
             case "Left":
+                leftOrRight--;
                 break;
         }
+    }
+    public void resetAndMove(float up, float right)
+    {
+        upOrDown = up;
+        leftOrRight = up;
+        moveCamera.resetAndMove(up, right);
+    }
+    public void newAreaCode(float up, float right)
+    {
+        upOrDown = up;
+        leftOrRight = right;
     }
 }

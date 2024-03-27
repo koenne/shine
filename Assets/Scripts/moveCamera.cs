@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class moveCamera : MonoBehaviour
@@ -23,10 +24,16 @@ public class moveCamera : MonoBehaviour
     public Vector3 cameraPosition;
     private int count = 0;
 
+    private float value1;
+    private float value2;
+
+    private areaPlayerScript areaPlayerScript;
+
     // Start is called before the first frame update
     void Start()
     {
         cameraPosition = Camera.main.transform.position;
+        areaPlayerScript = FindObjectOfType<areaPlayerScript>();
     }
 
     // Update is called once per frame
@@ -76,15 +83,19 @@ public class moveCamera : MonoBehaviour
         {
             case "left":
                 transform.position = new Vector3(cameraPosition.x - 16, cameraPosition.y, cameraPosition.z);
+                areaPlayerScript.locationChange("Left");
                 break;
             case "right":
                 transform.position = new Vector3(cameraPosition.x + 16, cameraPosition.y, cameraPosition.z);
+                areaPlayerScript.locationChange("Right");
                 break;
             case "up":
                 transform.position = new Vector3(cameraPosition.x, cameraPosition.y + 9, cameraPosition.z);
+                areaPlayerScript.locationChange("Up");
                 break;
             case "down":
                 transform.position = new Vector3(cameraPosition.x, cameraPosition.y - 9, cameraPosition.z);
+                areaPlayerScript.locationChange("Down");
                 break;
         }
         Reset();
@@ -96,4 +107,11 @@ public class moveCamera : MonoBehaviour
         goRight = false;
         goLeft = false;
     }
+    public void resetAndMove(float upDown, float leftRight)
+    {
+        transform.position = new Vector3(0f, 0.5f, cameraPosition.z);
+        value1 = 9f * upDown + 0.5f;
+        value2 = 16f * leftRight;
+        transform.position = new Vector3(value2, value1, cameraPosition.z);
+    } 
 }
