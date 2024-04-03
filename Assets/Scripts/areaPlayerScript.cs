@@ -18,10 +18,6 @@ public class areaPlayerScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
     public void locationChange(string direction)
     {
         switch (direction)

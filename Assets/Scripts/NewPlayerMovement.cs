@@ -11,21 +11,34 @@ public class NewPlayerMovement : MonoBehaviour
 
     float horizontalMove = 0f;
     bool jump = false;
+    public bool canMove = true;
 
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        if (Input.GetButtonDown("Jump"))
+        if (canMove)
         {
-            jump = true;
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            if (Input.GetButtonDown("Jump"))
+            {
+                jump = true;
+            }
         }
+
     }
 
     void FixedUpdate()
     {
-        // Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
-        jump = false;
+        if (canMove)
+        {
+            // Move our character
+            controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
+            jump = false;
+        }
+
+    }
+    public void died(bool yes)
+    {
+        canMove = yes;
     }
 }
