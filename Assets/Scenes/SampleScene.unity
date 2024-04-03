@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7798072002860551195, guid: bd44d67fddfdc2a438de2c7d8696b528, type: 3}
+      propertyPath: checkPointSound
+      value: 
+      objectReference: {fileID: 684069904}
     - target: {fileID: 8882400455054226479, guid: bd44d67fddfdc2a438de2c7d8696b528, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7024636
@@ -889,6 +893,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7798072002860551195, guid: bd44d67fddfdc2a438de2c7d8696b528, type: 3}
+      propertyPath: checkPointSound
+      value: 
+      objectReference: {fileID: 684069904}
     - target: {fileID: 8882400455054226479, guid: bd44d67fddfdc2a438de2c7d8696b528, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.915901
@@ -1427,6 +1435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7798072002860551195, guid: bd44d67fddfdc2a438de2c7d8696b528, type: 3}
+      propertyPath: checkPointSound
+      value: 
+      objectReference: {fileID: 684069904}
     - target: {fileID: 8882400455054226479, guid: bd44d67fddfdc2a438de2c7d8696b528, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.84161
@@ -2453,6 +2465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1d174a9392bdc45bed7f94bb24cab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSound: {fileID: 1376204463}
 --- !u!1 &1274033274
 GameObject:
   m_ObjectHideFlags: 0
@@ -52468,6 +52481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint
       objectReference: {fileID: 0}
+    - target: {fileID: 7798072002860551195, guid: bd44d67fddfdc2a438de2c7d8696b528, type: 3}
+      propertyPath: checkPointSound
+      value: 
+      objectReference: {fileID: 684069904}
     - target: {fileID: 8882400455054226479, guid: bd44d67fddfdc2a438de2c7d8696b528, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.4

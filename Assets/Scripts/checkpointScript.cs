@@ -7,6 +7,7 @@ public class checkpointScript : MonoBehaviour
     public Vector3 checkPointposition;
     private playerCheckpointScript playerCheckpointScript;
     private areaPlayerScript areaPlayerScript;
+    public AudioSource checkPointSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class checkpointScript : MonoBehaviour
         {
             checkPointposition = this.transform.position;
             playerCheckpointScript.saveCheckPoint(checkPointposition, areaPlayerScript.upOrDown, areaPlayerScript.leftOrRight);
+            checkPointSound.Play();
         }
     }
 }

@@ -9,6 +9,7 @@ public class playerSpikes : MonoBehaviour
     private playerCheckpointScript playerCheckpointScript;
     private NewPlayerMovement NewPlayerMovement;
     private Rigidbody2D rb;
+    public AudioSource deathSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,7 @@ public class playerSpikes : MonoBehaviour
         {
             isDead = true;
             NewPlayerMovement.died(false);
+            deathSound.Play();
         }
     }
 }
