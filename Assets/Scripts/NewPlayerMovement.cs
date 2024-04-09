@@ -33,7 +33,7 @@ public class NewPlayerMovement : MonoBehaviour
         {
             // Move our character
             controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
-                jump = false;
+            jump = false;
         }
 
     }

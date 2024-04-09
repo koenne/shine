@@ -25,16 +25,15 @@ public class playerSpikes : MonoBehaviour
         if (timeRemaining > 0 && isDead)
         {
             timeRemaining -= Time.deltaTime;
-            Debug.Log(timeRemaining);
-            rb.isKinematic = true;
+            rb.simulated = false;
         }
         if(timeRemaining < 0 && isDead)
         {
+            rb.simulated = true;
             playerCheckpointScript.teleport();
-            timeRemaining = 1.5f;
+            timeRemaining = 0.5f;
             isDead = false;
             NewPlayerMovement.died(true);
-            rb.isKinematic = false;
         }
     }
 
@@ -48,5 +47,12 @@ public class playerSpikes : MonoBehaviour
             deathSound.Play();
  
         }
+    }
+    public void enemyHit()
+    {
+        animator.SetBool("isDead", true);
+        isDead = true;
+        NewPlayerMovement.died(false);
+        deathSound.Play();
     }
 }

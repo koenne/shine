@@ -29,7 +29,8 @@ public class playerAnimator : MonoBehaviour
         {
             setRunning(false);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (Input.GetKey(KeyCode.Space))
         {
             setJumping(true);
         }
@@ -49,10 +50,13 @@ public class playerAnimator : MonoBehaviour
     {
         if (jumping)
         {
+            if (!animator.GetBool("isJumping"))
+            {
             animator.SetBool("isJumping", true);
             isFalling = true;
+            }
         }
-        else
+        if(!isFalling)
         {
             animator.SetBool("isJumping", false);
         }
@@ -63,7 +67,6 @@ public class playerAnimator : MonoBehaviour
         {
             animator.SetBool("isFalling", true);
             isFalling = true;
-            animator.SetBool("isJumping", false);
         }
         else
         {
