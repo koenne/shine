@@ -11,6 +11,7 @@ public class playerCheckpointScript : MonoBehaviour
     private Rigidbody2D rb;
     public areaPlayerScript areaPlayerScript;
     public bool uwu = false;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,7 @@ public class playerCheckpointScript : MonoBehaviour
         rb.position = savedPos;
         areaPlayerScript.resetAndMove(savedUp, savedRight);
         areaPlayerScript.newAreaCode(savedUp, savedRight);
+        animator.SetBool("isDead", false);
     }
     public void saveCheckPoint(Vector3 newPos, float up, float right)
     {

@@ -10,6 +10,7 @@ public class playerSpikes : MonoBehaviour
     private NewPlayerMovement NewPlayerMovement;
     private Rigidbody2D rb;
     public AudioSource deathSound;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,9 +42,11 @@ public class playerSpikes : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spikes"))
         {
+            animator.SetBool("isDead", true);
             isDead = true;
             NewPlayerMovement.died(false);
             deathSound.Play();
+ 
         }
     }
 }
