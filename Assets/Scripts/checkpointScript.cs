@@ -31,7 +31,6 @@ public class checkpointScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Debug.Log(opacity);
         if (catAnimate)
         {
             if(opacity < 2f && !didOnce)

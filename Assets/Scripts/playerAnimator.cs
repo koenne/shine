@@ -41,7 +41,7 @@ public class playerAnimator : MonoBehaviour
             setRunning(false);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") || Input.GetKey(KeyCode.Space))
         {
             setJumping(true);
         }
