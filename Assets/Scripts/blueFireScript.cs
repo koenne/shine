@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class blueFireScript : MonoBehaviour
 {
+    public AudioSource blueFireSound;   
+    public AudioSource redHitSound;
+    private void Start()
+    {
+        blueFireSound.Play();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -14,6 +20,9 @@ public class blueFireScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             Object.Destroy(this.gameObject);
+            Object.Destroy(blueFireSound.gameObject);
+            Object.Destroy(redHitSound.gameObject);
+            redHitSound.Play();
         }
 
     }

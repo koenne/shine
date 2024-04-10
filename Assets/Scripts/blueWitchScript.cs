@@ -6,9 +6,10 @@ using UnityEngine.UIElements;
 
 public class blueWitchScript : MonoBehaviour
 {
-    public GameObject magicBall;
+    public GameObject blueMagicBall;
+    public GameObject greenMagicBall;
     public GameObject blueWitch;
-    public float shootTimer = 0.15f;
+    private float shootTimer = 1f;
     public Vector3 dir;
     public int amount1 = 0;
     public int amount2 = 0;
@@ -23,8 +24,10 @@ public class blueWitchScript : MonoBehaviour
             shootTimer -= Time.deltaTime;
             if (shootTimer < 0)
             {
-                shootTimer = 0.15f;
-                bullet = (GameObject)GameObject.Instantiate(magicBall, transform.position + new Vector3(0, 0, Random.Range(-1, 1)), transform.rotation);
+                shootTimer = 0.3f;
+                bullet = (GameObject)GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, Random.Range(-2, 2)), transform.rotation);
+                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 25000);
+                bullet = (GameObject)GameObject.Instantiate(greenMagicBall, transform.position + new Vector3(0, 0, Random.Range(-2, 2)), transform.rotation);
                 transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 25000);
             }
         }
