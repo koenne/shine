@@ -11,10 +11,10 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
     [SerializeField] private playerAnimator animatorControl;
 	[SerializeField] private AudioSource jumpSound;
-	int jumpcount =0;
+	public int jumpcount =0;
 	public bool canJumpTwice = false;
     public float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
-	private bool m_Grounded;            // Whether or not the player is grounded.
+	public bool m_Grounded;            // Whether or not the player is grounded.
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
@@ -42,6 +42,9 @@ public class CharacterController2D : MonoBehaviour
 		{
             animatorControl.setFall(false);
             animatorControl.setJumping(false);
+            animatorControl.setJump2(false);
+            newPlayerMovement.resetJump();
+            jumpcount = 0;
         }
 		else
 		{
@@ -63,8 +66,6 @@ public class CharacterController2D : MonoBehaviour
 			{
 
                 m_Grounded = true;
-				newPlayerMovement.resetJump();
-				jumpcount = 0;
                 if (!wasGrounded)
 				{
 					OnLandEvent.Invoke();
@@ -108,15 +109,14 @@ public class CharacterController2D : MonoBehaviour
 		if (jump)
 		{
 			// Add a vertical force to the player.
-			if(canJumpTwice)
+			if(canJumpTwice && jumpcount < 1)
 			{
 				if(jump2 || jumpcount == 0)
 				{
                     animatorControl.setFall(false);
 					animatorControl.setJump2(true);
-                    animatorControl.setJump2(false);
+					m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
                     m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-					jumpcount++;
                 }
 				else
 				{
@@ -125,6 +125,7 @@ public class CharacterController2D : MonoBehaviour
                 }
                 jumpSound.Play();
                 animatorControl.setJumping(true);
+                jumpcount++;
             }
 			else if(m_Grounded)
 			{
