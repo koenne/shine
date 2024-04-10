@@ -28,7 +28,7 @@ public class blueWitchScript : MonoBehaviour
                 bullet = (GameObject)GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, Random.Range(-2, 2)), transform.rotation);
                 transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 25000);
                 bullet = (GameObject)GameObject.Instantiate(greenMagicBall, transform.position + new Vector3(0, 0, Random.Range(-2, 2)), transform.rotation);
-                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 25000);
+                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 30000);
             }
         }
     }

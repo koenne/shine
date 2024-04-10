@@ -19,10 +19,9 @@ public class blueFireScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Object.Destroy(this.gameObject);
-            Object.Destroy(blueFireSound.gameObject);
-            Object.Destroy(redHitSound.gameObject);
             redHitSound.Play();
+            Object.Destroy(this.gameObject);
+
         }
 
     }
