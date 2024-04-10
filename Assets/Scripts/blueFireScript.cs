@@ -1,17 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class blueFireScript : MonoBehaviour
 {
     public AudioSource blueFireSound;   
     public AudioSource redHitSound;
-    private void Start()
-    {
-        blueFireSound.Play();
-    }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         this.transform.position += transform.right * Time.deltaTime * 5;
     }
@@ -19,9 +16,8 @@ public class blueFireScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            redHitSound.Play();
+            AudioSource.PlayClipAtPoint(redHitSound.clip, this.gameObject.transform.position);
             Object.Destroy(this.gameObject);
-
         }
 
     }

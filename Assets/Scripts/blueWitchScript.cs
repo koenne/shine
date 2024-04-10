@@ -18,7 +18,7 @@ public class blueWitchScript : MonoBehaviour
     public GameObject bullet;
     public bossMusicScript bossMusic;
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (bossMusic.starting)
         {
@@ -28,13 +28,13 @@ public class blueWitchScript : MonoBehaviour
             {
                 shootTimer = 0.25f;
                 bullet = (GameObject)GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, Random.Range(-3, 3)), transform.rotation);
-                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 7500);
+                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 5000);
             }
             if (shootTimer2 < 0)
             {
                 shootTimer2 = 0.25f;
                 bullet = (GameObject)GameObject.Instantiate(greenMagicBall, transform.position + new Vector3(0, 0, Random.Range(-3, 3)), transform.rotation);
-                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 7500);
+                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 5000);
             }
         }
     }

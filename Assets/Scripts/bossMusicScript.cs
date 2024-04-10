@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Collections.Generic;using UnityEngine;
 
 public class bossMusicScript : MonoBehaviour
 {
@@ -10,14 +9,59 @@ public class bossMusicScript : MonoBehaviour
     public AudioSource bulletMusic;
     public Animator animator;
     public blueWitchScript blueWitch;
+    public bool normal = false;
+    public bool boss = false;
+    public float volumeUp = 0;
+    public float volumeDown = 0;
+    private void FixedUpdate()
+    {
+        if(boss)
+        {
+
+
+            if (boss && volumeUp < 1)
+            {
+                volumeUp += 0.01f;
+                volumeDown -= 0.01f;
+                boss = true;
+            }
+            else
+            {
+                normal = false;
+                boss = false;
+            }
+            bulletMusic.volume = volumeUp;
+            normaMusic.volume = volumeDown;
+
+        }
+        if (normal)
+        {
+            if (normal && volumeUp < 1)
+            {
+                volumeUp += 0.01f;
+                volumeDown -= 0.01f;
+                normal = true;
+            }
+            else
+            {
+                normal = false;
+                boss = false;
+            }
+            bulletMusic.volume = volumeDown;
+            normaMusic.volume = volumeUp;
+        }
+
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             starting = true;
             animator.SetBool("Start", true);
-            normaMusic.volume = 0;
-            bulletMusic.volume = 1;
+            boss = true;
+            normal = false;
+            volumeUp = 0;
+            volumeDown = 1;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -26,10 +70,12 @@ public class bossMusicScript : MonoBehaviour
         {
             starting = false;
             animator.SetBool("Start", false);
-            bulletMusic.volume = 0;
-            normaMusic.volume = 1;
+            normal = true;
+            boss = false;
             blueWitch.shootTimer = 2f;
             blueWitch.shootTimer2 = 2.125f;
+            volumeUp = 0;
+            volumeDown = 1;
         }
     }
 }
