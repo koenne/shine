@@ -14,12 +14,6 @@ public class checkpointScript : MonoBehaviour
         playerCheckpointScript = FindObjectOfType<playerCheckpointScript>();
         areaPlayerScript = FindObjectOfType<areaPlayerScript>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.name == "New Player")

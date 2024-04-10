@@ -45,7 +45,6 @@ public class playerSpikes : MonoBehaviour
             isDead = true;
             NewPlayerMovement.died(false);
             deathSound.Play();
- 
         }
     }
     public void enemyHit()
