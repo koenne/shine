@@ -7,7 +7,7 @@ public class redWitchScript : MonoBehaviour
     public GameObject blueMagicBall;
     public GameObject redWitch;
     public GameObject wall;
-    public float shootTimer = 1.5f;
+    public float shootTimer = 2f;
     public Vector3 dir;
     private GameObject bullet;
     public bossMusicScript1 bossMusic;
@@ -20,7 +20,7 @@ public class redWitchScript : MonoBehaviour
             shootTimer -= Time.deltaTime;
             if (shootTimer < 0)
             {
-                shootTimer = 1.5f;
+                shootTimer = 2f;
                 bullet = (GameObject)GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)), transform.rotation);
             }
         }

@@ -5,6 +5,7 @@ public class bossMusicScript1 : MonoBehaviour
     public bool starting = false;
     public AudioSource normaMusic; 
     public AudioSource bulletMusic;
+    public GameObject wall;
     public bool normal = false;
     public bool boss = false;
     public float volumeUp = 0;
@@ -57,22 +58,31 @@ public class bossMusicScript1 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if(!dead)
+            {
             starting = true;
             boss = true;
             normal = false;
             volumeUp = 0;
             volumeDown = 1;
+            wall.SetActive(true);
+            }
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            starting = false;
-            normal = true;
-            boss = false;
-            volumeUp = 0;
-            volumeDown = 1;
+            if (!dead)
+            {
+                starting = false;
+                normal = true;
+                boss = false;
+                volumeUp = 0;
+                volumeDown = 1;
+                wall.SetActive(false);
+            }
         }
     }
     public void destroying()
