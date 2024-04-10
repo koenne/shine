@@ -6,6 +6,8 @@ public class playerAnimator : MonoBehaviour
 {
     public Animator animator;
     public bool isFalling = false;
+    public AudioSource walk1;
+    private float time = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,15 @@ public class playerAnimator : MonoBehaviour
             if (!isFalling)
             {
                 setRunning(true);
+                time -= Time.deltaTime;
+                if (time < 0)
+                {
+                    time = 0.4f;
+                    float pitch = Random.Range(0.5f, 2.5f);
+                    walk1.pitch = pitch;
+                    walk1.Play();
+                }
+
             }
             else
             {
@@ -30,7 +41,7 @@ public class playerAnimator : MonoBehaviour
             setRunning(false);
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             setJumping(true);
         }
