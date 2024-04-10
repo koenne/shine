@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7980515971842435650}
   m_Layer: 6
   m_Name: redFire
-  m_TagString: Spikes
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,8 +187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 591344706704606915}
-  speed: 4.5
-  rotateSpeed: 450
   blueFireSound: {fileID: -8018173658189599443}
   redHitSound: {fileID: 9184431263400916042}
   col: {fileID: 7980515971842435650}
@@ -399,7 +397,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2039
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

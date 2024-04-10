@@ -7,22 +7,22 @@ public class blackFireScript : MonoBehaviour
 {
     public GameObject target;
     public redWitchScript redWitchScript;
+    public Animator animator;
+    public Collider2D col;
 
-    public float speed = 4f;
+    private float speed = 4f;
     private float rotateSpeed = 500f;
 
     public Rigidbody2D rb;
 
-    public AudioSource blueFireSound;
     public AudioSource redHitSound;
     private bool isHit = false;
     // Update is called once per frame
     private void Start()
     {
-        target = GameObject.Find("redwitch");
-        rb = target.GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
-    void FixedUpdate()
+    void Update()
     {
         if (isHit)
         {
@@ -42,10 +42,17 @@ public class blackFireScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isHit = true;
-            //redHitSound.Play();
+            col.enabled = false;
         }
-        if (collision.gameObject.layer.Equals("RedWitch"))
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "redwitch")
         {
+            animator.SetBool("isHit", true);
+            rb.velocity = new Vector2(0, 0);
+            rb.angularVelocity = 0;
+            isHit = false;
             AudioSource.PlayClipAtPoint(redHitSound.clip, this.gameObject.transform.position);
             Object.Destroy(this.gameObject, 1f);
         }

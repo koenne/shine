@@ -8,8 +8,8 @@ public class redFireScript : MonoBehaviour
     private GameObject target;
     public Animator animator;
 
-    public float speed = 5f;
-    public float rotateSpeed = 200f;
+    private float speed = 3.5f;
+    private float rotateSpeed = 200f;
 
     private Rigidbody2D rb;
 

@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;using UnityEngine;
+using UnityEngine;
 
 public class bossMusicScript : MonoBehaviour
 {
@@ -13,6 +11,7 @@ public class bossMusicScript : MonoBehaviour
     public bool boss = false;
     public float volumeUp = 0;
     public float volumeDown = 0;
+    bool dead = false;
     private void FixedUpdate()
     {
         if(boss)
@@ -50,6 +49,10 @@ public class bossMusicScript : MonoBehaviour
             bulletMusic.volume = volumeDown;
             normaMusic.volume = volumeUp;
         }
+        if(dead)
+        {
+            Object.Destroy(this.gameObject, 2f);
+        }
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -77,5 +80,13 @@ public class bossMusicScript : MonoBehaviour
             volumeUp = 0;
             volumeDown = 1;
         }
+    }
+    public void destroying()
+    {
+        normal = true;
+        boss = false;
+        dead = true;
+        volumeUp = 0;
+        volumeDown = 1;
     }
 }

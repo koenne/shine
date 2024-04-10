@@ -8,6 +8,7 @@ TagManager:
   - PlayerTag
   - Spikes
   - Checkpoint
+  - BlackFire
   layers:
   - Default
   - TransparentFX

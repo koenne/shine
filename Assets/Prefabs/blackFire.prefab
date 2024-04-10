@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7828821405822079295}
   - component: {fileID: 3583050868620552045}
   - component: {fileID: 803697431270977471}
+  - component: {fileID: 5382301973231000457}
   m_Layer: 0
   m_Name: blackFire
   m_TagString: Untagged
@@ -31,8 +32,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 356251744248068419}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.060314, y: 21.812302, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.31095314, y: -3.5213299, z: 1.5603946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -123,8 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df3a2cd00bffc74d82c412aa37995ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   redWitchScript: {fileID: 0}
-  speed: 4
+  animator: {fileID: 5591499889485564344}
+  col: {fileID: -5824490849803747242}
   rb: {fileID: 7828821405822079295}
   blueFireSound: {fileID: 803697431270977471}
   redHitSound: {fileID: 3583050868620552045}
@@ -382,3 +385,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &5382301973231000457
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356251744248068419}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.005409926, y: -0.20273946}
+  m_Size: {x: 0.101134956, y: 0.14441445}
+  m_Direction: 0
