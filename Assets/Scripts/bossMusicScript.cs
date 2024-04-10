@@ -9,6 +9,7 @@ public class bossMusicScript : MonoBehaviour
     public AudioSource normaMusic;
     public AudioSource bulletMusic;
     public Animator animator;
+    public blueWitchScript blueWitch;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -27,6 +28,8 @@ public class bossMusicScript : MonoBehaviour
             animator.SetBool("Start", false);
             bulletMusic.volume = 0;
             normaMusic.volume = 1;
+            blueWitch.shootTimer = 2f;
+            blueWitch.shootTimer2 = 2.125f;
         }
     }
 }

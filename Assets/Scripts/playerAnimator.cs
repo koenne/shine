@@ -84,6 +84,18 @@ public class playerAnimator : MonoBehaviour
             animator.SetBool("isFalling", false);
             isFalling = false;
             animator.SetBool("isJumping", false);
+            animator.SetBool("isJumping2", false);
+        }
+    }
+    public void setJump2(bool jump2)
+    {
+        if (jump2)
+        {
+            animator.SetBool("isJumping2", true);
+        }
+        else
+        {
+            animator.SetBool("isJumping2", false);
         }
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.Rendering;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -10,11 +11,14 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
     [SerializeField] private playerAnimator animatorControl;
 	[SerializeField] private AudioSource jumpSound;
+	int jumpcount =0;
+	public bool canJumpTwice = false;
     public float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+	public NewPlayerMovement newPlayerMovement;
 
 	[Header("Events")]
 	[Space]
@@ -59,7 +63,9 @@ public class CharacterController2D : MonoBehaviour
 			{
 
                 m_Grounded = true;
-				if (!wasGrounded)
+				newPlayerMovement.resetJump();
+				jumpcount = 0;
+                if (!wasGrounded)
 				{
 					OnLandEvent.Invoke();
 				}
@@ -70,7 +76,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool jump)
+	public void Move(float move, bool jump, bool jump2)
 	{
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
@@ -99,13 +105,35 @@ public class CharacterController2D : MonoBehaviour
 			animatorControl.setRunning(false);
 		}
 		// If the player should jump...
-		if (m_Grounded && jump)
+		if (jump)
 		{
-			jumpSound.Play();
-			animatorControl.setJumping(true);
 			// Add a vertical force to the player.
-			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			if(canJumpTwice)
+			{
+				if(jump2 || jumpcount == 0)
+				{
+                    animatorControl.setFall(false);
+					animatorControl.setJump2(true);
+                    animatorControl.setJump2(false);
+                    m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+					jumpcount++;
+                }
+				else
+				{
+                    m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                    m_Grounded = false;
+                }
+                jumpSound.Play();
+                animatorControl.setJumping(true);
+            }
+			else if(m_Grounded)
+			{
+                jumpSound.Play();
+                animatorControl.setJumping(true);
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                m_Grounded = false;
+            }
+
 		}
 	}
 

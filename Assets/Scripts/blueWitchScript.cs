@@ -9,8 +9,8 @@ public class blueWitchScript : MonoBehaviour
     public GameObject blueMagicBall;
     public GameObject greenMagicBall;
     public GameObject blueWitch;
-    private float shootTimer = 2f;
-    private float shootTimer2 = 2.125f;
+    public float shootTimer = 2f;
+    public float shootTimer2 = 2.125f;
     public Vector3 dir;
     public int amount1 = 0;
     public int amount2 = 0;
@@ -18,7 +18,7 @@ public class blueWitchScript : MonoBehaviour
     public GameObject bullet;
     public bossMusicScript bossMusic;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (bossMusic.starting)
         {
