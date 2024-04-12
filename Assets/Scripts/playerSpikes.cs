@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class playerSpikes : MonoBehaviour
@@ -11,6 +10,8 @@ public class playerSpikes : MonoBehaviour
     private Rigidbody2D rb;
     public AudioSource deathSound;
     public Animator animator;
+    public TextMeshProUGUI text;
+    public int deathcount = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +46,8 @@ public class playerSpikes : MonoBehaviour
             isDead = true;
             NewPlayerMovement.died(false);
             deathSound.Play();
+            deathcount++;
+            text.text = "Deaths: " + deathcount;
         }
     }
     public void enemyHit()

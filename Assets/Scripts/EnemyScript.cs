@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
     private float horizontal = 1f;
-    private float speed = 2f;
+    private float speed = 1.5f;
     private Rigidbody2D rb;
     private playerSpikes playerSpikes;
     private float count = 0f;

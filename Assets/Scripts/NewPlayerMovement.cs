@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewPlayerMovement : MonoBehaviour
 {
@@ -14,6 +13,8 @@ public class NewPlayerMovement : MonoBehaviour
     bool jump2 = false;
     public bool canMove = true;
     int jumpcount;
+    public GameObject menu;
+    private bool menubool = false;
 
     // Update is called once per frame
     void Update()
@@ -32,6 +33,19 @@ public class NewPlayerMovement : MonoBehaviour
                     jump = true;
                 }
                 jumpcount++;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if (menubool)
+            {
+                menu.SetActive(false);
+                menubool= false;
+            }
+            else
+            {
+                menu.SetActive(true);
+                menubool = true;
             }
         }
 
@@ -55,5 +69,11 @@ public class NewPlayerMovement : MonoBehaviour
     public void resetJump()
     {
         jumpcount = 0;
+    }
+    public void resetFully()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+
     }
 }

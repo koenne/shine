@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Experimental.Rendering;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -148,5 +147,9 @@ public class CharacterController2D : MonoBehaviour
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+	}
+	public void doubleJumpActivate()
+	{
+		canJumpTwice = !canJumpTwice;
 	}
 }

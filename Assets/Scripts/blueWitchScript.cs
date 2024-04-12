@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class blueWitchScript : MonoBehaviour
 {
@@ -26,13 +22,13 @@ public class blueWitchScript : MonoBehaviour
             shootTimer2 -= Time.deltaTime;
             if (shootTimer < 0)
             {
-                shootTimer = 0.25f;
+                shootTimer = 0.35f;
                 bullet = (GameObject)GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, Random.Range(-3, 3)), transform.rotation);
                 transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 5000);
             }
             if (shootTimer2 < 0)
-            {
-                shootTimer2 = 0.25f;
+            { 
+                shootTimer2 = 0.35f;
                 bullet = (GameObject)GameObject.Instantiate(greenMagicBall, transform.position + new Vector3(0, 0, Random.Range(-3, 3)), transform.rotation);
                 transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, Time.deltaTime * 5000);
             }
