@@ -13,7 +13,7 @@ public class blueFireScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            AudioSource.PlayClipAtPoint(redHitSound.clip, this.gameObject.transform.position);
+            //AudioSource.PlayClipAtPoint(redHitSound.clip, this.gameObject.transform.position);
             Object.Destroy(this.gameObject);
         }
 

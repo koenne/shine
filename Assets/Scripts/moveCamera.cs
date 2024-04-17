@@ -34,44 +34,44 @@ public class moveCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (goLeft)
-        {
-            if (goLeftLeft && count == 0 && !goLeftRight)
+            if (goLeft)
             {
-                count++;
-                changePosition("left");
+                if (goLeftLeft && count == 0 && !goLeftRight)
+                {
+                    count++;
+                    changePosition("left");
+                }
             }
-        }
-        if (goRight)
-        {
-            if (goRightRight && count == 0 && !goRightLeft)
+            if (goRight)
             {
-                count++;
-                changePosition("right");
+                if (goRightRight && count == 0 && !goRightLeft)
+                {
+                    count++;
+                    changePosition("right");
+                }
             }
-        }
-        if (goUp)
-        {
-            if(goUpUp && count == 0 && !goUpDown)
+            if (goUp)
             {
-                count++;
-                changePosition("up");
+                if (goUpUp && count == 0 && !goUpDown)
+                {
+                    count++;
+                    changePosition("up");
+                }
             }
-        }
-        if (goDown)
-        {
-            if(goDownDown && count == 0 && !goDownUp)
+            if (goDown)
             {
-                count++;
-                changePosition("down");
+                if (goDownDown && count == 0 && !goDownUp)
+                {
+                    count++;
+                    changePosition("down");
+                }
             }
-        }
-        if (!goDown && !goUp && !goRight && !goLeft)
-        {
-            count = 0;
-        }
+            if (!goDown && !goUp && !goRight && !goLeft)
+            {
+                count = 0;
+            }
     }
     public void changePosition(string whatDirection)
     {
@@ -103,6 +103,14 @@ public class moveCamera : MonoBehaviour
         goDown = false;
         goRight = false;
         goLeft = false;
+        goUpUp = false;
+        goDownDown = false;
+        goRightRight = false;
+        goLeftLeft = false;
+        goUpDown = false;
+        goDownUp = false;
+        goRightLeft = false;
+        goLeftRight = false;
     }
     public void resetAndMove(float upDown, float leftRight)
     {

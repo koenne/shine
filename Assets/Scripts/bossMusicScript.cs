@@ -14,40 +14,41 @@ public class bossMusicScript : MonoBehaviour
     bool dead = false;
     private void FixedUpdate()
     {
-        if(boss)
+        if (boss || normal)
         {
+            if (boss)
+            {
+                if (boss && volumeUp < 1)
+                {
+                    volumeUp += 0.01f;
+                    volumeDown -= 0.01f;
+                    boss = true;
+                }
+                else
+                {
+                    normal = false;
+                    boss = false;
+                }
+                bulletMusic.volume = volumeUp;
+                normaMusic.volume = volumeDown;
 
-
-            if (boss && volumeUp < 1)
-            {
-                volumeUp += 0.01f;
-                volumeDown -= 0.01f;
-                boss = true;
             }
-            else
+            if (normal)
             {
-                normal = false;
-                boss = false;
+                if (normal && volumeUp < 1)
+                {
+                    volumeUp += 0.01f;
+                    volumeDown -= 0.01f;
+                    normal = true;
+                }
+                else
+                {
+                    normal = false;
+                    boss = false;
+                }
+                bulletMusic.volume = volumeDown;
+                normaMusic.volume = volumeUp;
             }
-            bulletMusic.volume = volumeUp;
-            normaMusic.volume = volumeDown;
-
-        }
-        if (normal)
-        {
-            if (normal && volumeUp < 1)
-            {
-                volumeUp += 0.01f;
-                volumeDown -= 0.01f;
-                normal = true;
-            }
-            else
-            {
-                normal = false;
-                boss = false;
-            }
-            bulletMusic.volume = volumeDown;
-            normaMusic.volume = volumeUp;
         }
         if(dead)
         {
@@ -76,7 +77,6 @@ public class bossMusicScript : MonoBehaviour
             normal = true;
             boss = false;
             blueWitch.shootTimer = 2f;
-            blueWitch.shootTimer2 = 2.125f;
             volumeUp = 0;
             volumeDown = 1;
         }
