@@ -34,7 +34,7 @@ public class blueWitchScript : MonoBehaviour
             bullet = GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, 0), transform.rotation);
             if (isSecond)
             {
-                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, 2.5f);
+                transform.RotateAround(blueWitch.transform.localPosition, -Vector3.back, 2.5f);
             }
             else
             {
