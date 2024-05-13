@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Text;
+using TreeEditor;
 using UnityEngine;
 
 public class blueWitchScript : MonoBehaviour
@@ -21,24 +22,25 @@ public class blueWitchScript : MonoBehaviour
         if (bossMusic.starting)
         {
             //shootTimer += Time.deltaTime;
-            if(timerInt % 2 == 0)
+            //if(timerInt % 2 == 0)
             {
                 FireFunction();
                 //shootTimer = 0;
             }
-            timerInt++;
         }
     }
     public void FireFunction()
     {
-            bullet = GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, 0), transform.rotation);
-            if (isSecond)
+            timerInt++;
+            if (isSecond && timerInt % 4 == 0)
             {
-                transform.RotateAround(blueWitch.transform.localPosition, -Vector3.back, 2.5f);
+                bullet = GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, 0), transform.rotation);
+                transform.RotateAround(blueWitch.transform.localPosition, -Vector3.back, 3f);
             }
-            else
-            {
-                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, -2.5f);
+            else if(timerInt % 4 == 2)
+            {;
+                bullet = GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, 0), new Quaternion(transform.rotation.x,transform.rotation.y,-transform.rotation.z,transform.rotation.w));
+                transform.RotateAround(blueWitch.transform.localPosition, Vector3.back, -3f);
             }
     }
 }

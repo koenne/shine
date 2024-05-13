@@ -7,7 +7,7 @@ public class blueFireScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        this.transform.position += transform.right * Time.deltaTime * 5;
+        this.transform.position += transform.right * Time.deltaTime * 4f;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
