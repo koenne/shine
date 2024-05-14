@@ -27,8 +27,8 @@ public class redWitchScript : MonoBehaviour
         if(damage == 0)
         {
             bossMusic.destroying();
-            Object.Destroy(wall);
-            Object.Destroy(this.gameObject, 1f);
+            Destroy(wall);
+            Destroy(gameObject, 1f);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
