@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class shroomScript : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class shroomScript : MonoBehaviour
     private float count = 0f;
     public Animator animator;
     private Vector3 startPos;
-    public Rigidbody2D playerRB;
-    public float jumpHeight;
+    private Rigidbody2D playerRB;
     private float timer = 0f;
     private bool canMove = true;
+    public AudioSource bounceSound;
+    public float jumpForce;
+    public bool isIdle;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,11 @@ public class shroomScript : MonoBehaviour
         playerSpikes = FindObjectOfType<playerSpikes>();
         playerRB = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
         animator.gameObject.GetComponent<Animator>().enabled = false;
+        jumpForce *= 100;
+        if (isIdle)
+        {
+            animator.SetBool("isIdle", true);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -69,7 +77,10 @@ public class shroomScript : MonoBehaviour
                 count += Time.deltaTime;
             if (canMove)
             {
-                rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+                if (!isIdle)
+                {
+                    rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+                }
             }
             else
             {
@@ -79,6 +90,7 @@ public class shroomScript : MonoBehaviour
                     if(timer < 0.5f)
                     {
                         animator.SetBool("isHit", false);
+                        animator.SetBool("isHitAgain", false);
                     }
                     //Debug.Log(timer);
                 }
@@ -103,14 +115,19 @@ public class shroomScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //jumpHeight = -playerRB.velocity.y * 10;
             rb.velocity = new Vector2(0, 0);
+            animator.SetBool("isDone", false);
+            animator.SetBool("isHit", true);
+            if (!canMove)
+            {
+                animator.SetBool("isHitAgain", true);
+                animator.SetBool("isHit", false);
+            }
             canMove = false;
             timer = 0;
             playerRB.velocity = new Vector2(playerRB.velocity.x, 0);
-            playerRB.AddForce(new Vector2(0f, 500));
-            animator.SetBool("isDone", false);
-            animator.SetBool("isHit", true);
+            playerRB.AddForce(new Vector2(0f, jumpForce));
+            bounceSound.Play();
         }
     }
 }
