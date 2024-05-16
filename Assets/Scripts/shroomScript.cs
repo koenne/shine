@@ -50,6 +50,9 @@ public class shroomScript : MonoBehaviour
         if (collision.gameObject.CompareTag("CameraTrigger"))
         {
             animator.gameObject.GetComponent<Animator>().enabled = true;
+            animator.SetBool("isHit", false);
+            animator.SetBool("isHitAgain", false);
+            animator.SetBool("isDone", true);
             rb.transform.position = startPos;
         }
     }
@@ -127,6 +130,8 @@ public class shroomScript : MonoBehaviour
             timer = 0;
             playerRB.velocity = new Vector2(playerRB.velocity.x, 0);
             playerRB.AddForce(new Vector2(0f, jumpForce));
+            float pitch = Random.Range(0.5f, 2.5f);
+            bounceSound.pitch = pitch;
             bounceSound.Play();
         }
     }
