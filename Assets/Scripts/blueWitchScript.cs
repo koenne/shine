@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Text;
-using TreeEditor;
 using UnityEngine;
 
 public class blueWitchScript : MonoBehaviour
