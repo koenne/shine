@@ -13,7 +13,14 @@ public class blueWitchScript : MonoBehaviour
     {
         if (bossMusic.starting)
         {
-            FireFunction();
+            if(shootTimer < 0f)
+            {
+                FireFunction();
+            }
+            else
+            {
+                shootTimer -= Time.deltaTime;
+            }
         }
     }
     public void FireFunction()
@@ -22,12 +29,12 @@ public class blueWitchScript : MonoBehaviour
             if (timerInt % 4 == 0)
             {
                 bullet = GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, 0), transform.rotation);
-                transform.RotateAround(blueWitch.transform.localPosition, -Vector3.back, 10);
+                transform.RotateAround(blueWitch.transform.localPosition, -Vector3.back, 7.5f);
             }
             else if(timerInt % 4 == 2)
             {
                 bullet = GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(0, 0, 0), new Quaternion(transform.rotation.x,transform.rotation.y,-transform.rotation.z,transform.rotation.w));
-                transform.RotateAround(blueWitch.transform.localPosition, Vector3.forward, 10);
+                transform.RotateAround(blueWitch.transform.localPosition, Vector3.forward, 7.5f);
             }
     }
 }

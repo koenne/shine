@@ -76,7 +76,7 @@ public class bossMusicScript : MonoBehaviour
             animator.SetBool("Start", false);
             normal = true;
             boss = false;
-            blueWitch.shootTimer = 2f;
+            blueWitch.shootTimer = 0;
             volumeUp = 0;
             volumeDown = 1;
         }

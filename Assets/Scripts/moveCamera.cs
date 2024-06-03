@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class moveCamera : MonoBehaviour
@@ -24,6 +25,8 @@ public class moveCamera : MonoBehaviour
     private float value1;
     private float value2;
 
+    public GameObject player;
+
     private areaPlayerScript areaPlayerScript;
 
     // Start is called before the first frame update
@@ -32,6 +35,16 @@ public class moveCamera : MonoBehaviour
         cameraPosition = Camera.main.transform.position;
         areaPlayerScript = FindObjectOfType<areaPlayerScript>();
     }
+    //private void Update()
+    //{
+    //    if(math.round(player.transform.position.x) % 16 == 0)
+    //    {
+    //        transform.position = new Vector3(0f, 0.5f, cameraPosition.z);
+    //        value1 = 9f * math.round(player.transform.position.y) / 9 + 0.5f;
+    //        value2 = 16f * math.round(player.transform.position.x) / 8;
+    //        transform.position = new Vector3(value2, value1, cameraPosition.z);
+    //    }
+    //}
 
     // Update is called once per frame
     void FixedUpdate()
