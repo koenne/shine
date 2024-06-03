@@ -10,7 +10,9 @@ public class bossMusicScript1 : MonoBehaviour
     public bool boss = false;
     public float volumeUp = 0;
     public float volumeDown = 0;
-    bool dead = false;
+    private bool dead = false;
+    private bool entered = false;
+    private float enteredTimer = 0;
     private void FixedUpdate()
     {
         if(boss)
@@ -52,6 +54,16 @@ public class bossMusicScript1 : MonoBehaviour
         {
             Object.Destroy(this.gameObject, 10f);
         }
+        if (entered)
+        {
+            enteredTimer += Time.deltaTime;
+            if(enteredTimer > 0.1f)
+            {
+                entered = false;
+                enteredTimer = 0;
+                wall.SetActive(true);
+            }
+        }
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,12 +72,12 @@ public class bossMusicScript1 : MonoBehaviour
         {
             if(!dead)
             {
-            starting = true;
-            boss = true;
-            normal = false;
-            volumeUp = 0;
-            volumeDown = 1;
-            wall.SetActive(true);
+                starting = true;
+                boss = true;
+                normal = false;
+                volumeUp = 0;
+                volumeDown = 1;
+                entered = true;
             }
 
         }
