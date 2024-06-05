@@ -13,10 +13,12 @@ public class portalTeleport : MonoBehaviour
     public GameObject otherPortal;
     public bool isFlipped;
     public AudioSource teleportSound;
+    public areaPlayerScript areaPlayer;
     // Start is called before the first frame update
     void Start()
     {
         moveCamera = FindObjectOfType<moveCamera>();
+        areaPlayer = FindObjectOfType<areaPlayerScript>();
         player = GameObject.FindGameObjectWithTag("Player");
         rb = player.gameObject.GetComponent<Rigidbody2D>();
         if (isFlipped)
@@ -30,11 +32,11 @@ public class portalTeleport : MonoBehaviour
     {
         if (isFlipped)
         {
-            rb.position = new Vector2(otherPortal.transform.position.x + 1f, otherPortal.transform.position.y);
+            rb.position = new Vector2(otherPortal.transform.position.x + 0.25f, otherPortal.transform.position.y);
         }
         else
         {
-            rb.position = new Vector2(otherPortal.transform.position.x - 1f, otherPortal.transform.position.y);
+            rb.position = new Vector2(otherPortal.transform.position.x - 0.25f, otherPortal.transform.position.y);
         }
         moveCamera.resetAndMove(upOrDown, leftOrRight);
     }
@@ -44,6 +46,8 @@ public class portalTeleport : MonoBehaviour
         {
             teleportSound.Play();
             teleport();
+            areaPlayer.upOrDown = upOrDown;
+            areaPlayer.leftOrRight = leftOrRight;
         }
     }
 }

@@ -28,6 +28,9 @@ public class moveCamera : MonoBehaviour
     public GameObject player;
 
     private areaPlayerScript areaPlayerScript;
+    private float areaHor;
+    private float areaHorMinus = 16;
+    private float areaVert;
 
     // Start is called before the first frame update
     void Start()
@@ -37,54 +40,55 @@ public class moveCamera : MonoBehaviour
     }
     //private void Update()
     //{
-    //    if(math.round(player.transform.position.x) % 16 == 0)
+    //    areaHor = math.round(player.transform.position.x + 8);
+    //    if (areaHor > areaHorMinus)
     //    {
+    //        areaHorMinus += 16;
     //        transform.position = new Vector3(0f, 0.5f, cameraPosition.z);
-    //        value1 = 9f * math.round(player.transform.position.y) / 9 + 0.5f;
     //        value2 = 16f * math.round(player.transform.position.x) / 8;
     //        transform.position = new Vector3(value2, value1, cameraPosition.z);
     //    }
-    //}
+//    }
 
-    // Update is called once per frame
+//Update is called once per frame
     void FixedUpdate()
     {
-            if (goLeft)
+        if (goLeft)
+        {
+            if (goLeftLeft && count == 0 && !goLeftRight)
             {
-                if (goLeftLeft && count == 0 && !goLeftRight)
-                {
-                    count++;
-                    changePosition("left");
-                }
+                count++;
+                changePosition("left");
             }
-            if (goRight)
+        }
+        if (goRight)
+        {
+            if (goRightRight && count == 0 && !goRightLeft)
             {
-                if (goRightRight && count == 0 && !goRightLeft)
-                {
-                    count++;
-                    changePosition("right");
-                }
+                count++;
+                changePosition("right");
             }
-            if (goUp)
+        }
+        if (goUp)
+        {
+            if (goUpUp && count == 0 && !goUpDown)
             {
-                if (goUpUp && count == 0 && !goUpDown)
-                {
-                    count++;
-                    changePosition("up");
-                }
+               count++;
+               changePosition("up");
             }
-            if (goDown)
+        }
+        if (goDown)
+        {
+            if (goDownDown && count == 0 && !goDownUp)
             {
-                if (goDownDown && count == 0 && !goDownUp)
-                {
-                    count++;
-                    changePosition("down");
-                }
-            }
-            if (!goDown && !goUp && !goRight && !goLeft)
-            {
-                count = 0;
-            }
+                count++;
+               changePosition("down");
+           }
+        }
+        if (!goDown && !goUp && !goRight && !goLeft)
+        {
+            count = 0;
+        }
     }
     public void changePosition(string whatDirection)
     {
