@@ -10,6 +10,7 @@ TagManager:
   - Checkpoint
   - BlackFire
   - CameraTrigger
+  - RedWitch
   layers:
   - Default
   - TransparentFX

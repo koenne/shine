@@ -20,6 +20,8 @@ public class blackFireScript : MonoBehaviour
     // Update is called once per frame
     private void Start()
     {
+        target = GameObject.FindGameObjectWithTag("RedWitch");
+        redWitchScript = FindObjectOfType<redWitchScript>();
         rb = GetComponent<Rigidbody2D>();
     }
     void Update()

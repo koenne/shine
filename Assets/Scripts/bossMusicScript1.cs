@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class bossMusicScript1 : MonoBehaviour
@@ -13,6 +14,8 @@ public class bossMusicScript1 : MonoBehaviour
     private bool dead = false;
     private bool entered = false;
     private float enteredTimer = 0;
+    public redWitchScript redWitchScript;
+    public GameObject blackFire;
     private void FixedUpdate()
     {
         if(boss)
@@ -78,9 +81,21 @@ public class bossMusicScript1 : MonoBehaviour
                 volumeUp = 0;
                 volumeDown = 1;
                 entered = true;
+                spawnFire();
+                resetHealth();
             }
 
         }
+    }
+    void spawnFire()
+    {
+        Instantiate(blackFire, new Vector2(32, 16), Quaternion.identity);
+        Instantiate(blackFire, new Vector2(29.5f, 20), Quaternion.identity);
+        Instantiate(blackFire, new Vector2(35.5f, 20), Quaternion.identity);
+    }
+    void resetHealth()
+    {
+        redWitchScript.damage = 3;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -94,6 +109,9 @@ public class bossMusicScript1 : MonoBehaviour
                 volumeUp = 0;
                 volumeDown = 1;
                 wall.SetActive(false);
+                GameObject[] gos = GameObject.FindGameObjectsWithTag("BlackFire");
+                foreach (GameObject go in gos)
+                    Destroy(go);
             }
         }
     }

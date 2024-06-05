@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5382301973231000457}
   m_Layer: 0
   m_Name: blackFire
-  m_TagString: Untagged
+  m_TagString: BlackFire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,9 +32,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 356251744248068419}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.31095314, y: -3.5213299, z: 1.5603946}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,7 +129,6 @@ MonoBehaviour:
   animator: {fileID: 5591499889485564344}
   col: {fileID: -5824490849803747242}
   rb: {fileID: 7828821405822079295}
-  blueFireSound: {fileID: 803697431270977471}
   redHitSound: {fileID: 3583050868620552045}
 --- !u!70 &-5824490849803747242
 CapsuleCollider2D:
@@ -400,7 +399,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 136
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -414,7 +413,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.005409926, y: -0.20273946}

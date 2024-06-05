@@ -11,7 +11,7 @@ public class redWitchScript : MonoBehaviour
     public Vector3 dir;
     private GameObject bullet;
     public bossMusicScript1 bossMusic;
-    private int damage = 3;
+    public int damage = 3;
     // Update is called once per frame
     void Update()
     {
