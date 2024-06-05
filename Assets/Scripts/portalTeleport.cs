@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class portalTeleport : MonoBehaviour
@@ -8,6 +9,7 @@ public class portalTeleport : MonoBehaviour
     public int upOrDown;
     public int leftOrRight;
     public Rigidbody2D rb;
+    private GameObject player;
     public GameObject otherPortal;
     public bool isFlipped;
     public AudioSource teleportSound;
@@ -15,6 +17,8 @@ public class portalTeleport : MonoBehaviour
     void Start()
     {
         moveCamera = FindObjectOfType<moveCamera>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        rb = player.gameObject.GetComponent<Rigidbody2D>();
         if (isFlipped)
         {
             Vector3 theScale = transform.localScale;
