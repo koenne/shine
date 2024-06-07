@@ -22,7 +22,7 @@ public class checkpointScript : MonoBehaviour
         if(collision.gameObject.name == "New Player")
         {
             checkPointposition = this.transform.position;
-            playerCheckpointScript.saveCheckPoint(checkPointposition, areaPlayerScript.upOrDown, areaPlayerScript.leftOrRight);
+            playerCheckpointScript.saveCheckPoint(checkPointposition);
             checkPointSound.Play();
             catAnimate = true;
         }

@@ -89,6 +89,22 @@ PrefabInstance:
       propertyPath: otherPortal
       value: 
       objectReference: {fileID: 39419703834423020}
+    - target: {fileID: 7685050615649544015, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5889683
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685050615649544015, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9371109
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685050615649544015, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.021770477
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685050615649544015, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.004671097
+      objectReference: {fileID: 0}
     - target: {fileID: 8424375408554874723, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
       propertyPath: m_Name
       value: Portal (1)
@@ -160,6 +176,22 @@ PrefabInstance:
       propertyPath: otherPortal
       value: 
       objectReference: {fileID: 8095122076440762591}
+    - target: {fileID: 7685050615649544015, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5889683
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685050615649544015, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9371109
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685050615649544015, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.021770477
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685050615649544015, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.004671097
+      objectReference: {fileID: 0}
     - target: {fileID: 8424375408554874723, guid: d0a98f22f4c4cb941a630ee22938e7fb, type: 3}
       propertyPath: m_Name
       value: Portal

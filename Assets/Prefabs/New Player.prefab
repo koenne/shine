@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3130959564921053649}
   - component: {fileID: 2625279343320642920}
   - component: {fileID: 8554025523345068618}
-  - component: {fileID: 4344559509999119439}
   - component: {fileID: 230842445197220116}
   - component: {fileID: 1434978593745199327}
   - component: {fileID: 4539889483880958755}
@@ -38,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 3387362502100814358}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.71, y: -2.75, z: -1}
+  m_LocalPosition: {x: 2.84, y: -1.35, z: -1}
   m_LocalScale: {x: 1.21, y: 1.21, z: 1.21}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -140,7 +139,7 @@ MonoBehaviour:
   animatorControl: {fileID: 8554025523345068618}
   jumpSound: {fileID: 7305832553003810196}
   jumpcount: 0
-  canJumpTwice: 0
+  canJumpTwice: 1
   k_GroundedRadius: 0.1
   m_Grounded: 0
   newPlayerMovement: {fileID: 2625279343320642920}
@@ -178,18 +177,6 @@ MonoBehaviour:
   animator: {fileID: 7372528952937765998}
   isFalling: 0
   walk1: {fileID: 0}
---- !u!114 &4344559509999119439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3387362502100814358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf7785599791d8f44b679b14d2dfd1b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &230842445197220116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,12 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68abc189b21c644090dc1b0c4acc805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upOrDown: 0
-  leftOrRight: 0
-  startArearight: 0
-  startAreaup: 0
   go: 0
   cameraPos: {fileID: 0}
+  startingTeleportYes: 1
 --- !u!114 &1434978593745199327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,8 +239,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDrag: 0.25
+  m_AngularDrag: 0.25
   m_GravityScale: 1.5
   m_Material: {fileID: 6200000, guid: 125364a9d21bd5241ae8f8d97ba9207d, type: 2}
   m_IncludeLayers:
@@ -432,7 +416,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017679483, y: -0.33315378}
+  m_Offset: {x: -0.017679483, y: -0.3462827}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -443,7 +427,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28422076, y: 0.303246}
+  m_Size: {x: 0.28422076, y: 0.2769882}
   m_EdgeRadius: 0.0100001
 --- !u!1 &9129173938555530889
 GameObject:

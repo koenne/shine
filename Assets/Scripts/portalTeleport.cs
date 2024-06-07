@@ -14,6 +14,11 @@ public class portalTeleport : MonoBehaviour
     public bool isFlipped;
     public AudioSource teleportSound;
     public areaPlayerScript areaPlayer;
+    public bool isUp;
+    public bool isDown;
+    public bool isLeft;
+    public bool isRight;
+    private Vector3 test;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,15 +35,24 @@ public class portalTeleport : MonoBehaviour
     }
     public void teleport()
     {
-        if (isFlipped)
+        test = rb.velocity;
+        if(isUp)
+        {
+            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y - 0.5f);
+        }
+        if (isDown)
+        {
+            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y + 0.5f);
+        }
+        if (isLeft)
         {
             rb.position = new Vector2(otherPortal.transform.position.x + 0.25f, otherPortal.transform.position.y);
         }
-        else
+        if (isRight)
         {
             rb.position = new Vector2(otherPortal.transform.position.x - 0.25f, otherPortal.transform.position.y);
         }
-        moveCamera.resetAndMove(upOrDown, leftOrRight);
+        rb.velocity = test;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -46,8 +60,8 @@ public class portalTeleport : MonoBehaviour
         {
             teleportSound.Play();
             teleport();
-            areaPlayer.upOrDown = upOrDown;
-            areaPlayer.leftOrRight = leftOrRight;
+            //areaPlayer.upOrDown = upOrDown;
+            //areaPlayer.leftOrRight = leftOrRight;
         }
     }
 }

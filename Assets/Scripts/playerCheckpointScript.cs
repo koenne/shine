@@ -27,14 +27,11 @@ public class playerCheckpointScript : MonoBehaviour
     public void teleport()
     {
         rb.position = savedPos;
-        areaPlayerScript.resetAndMove(savedUp, savedRight);
-        areaPlayerScript.newAreaCode(savedUp, savedRight);
+        rb.velocity = new Vector3(0, 0, 0);
         animator.SetBool("isDead", false);
     }
-    public void saveCheckPoint(Vector3 newPos, float up, float right)
+    public void saveCheckPoint(Vector3 newPos)
     {
         savedPos = newPos;
-        savedUp = up;
-        savedRight = right;
     }
 }

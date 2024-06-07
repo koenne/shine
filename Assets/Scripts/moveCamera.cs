@@ -3,92 +3,25 @@ using UnityEngine;
 
 public class moveCamera : MonoBehaviour
 {
-    public bool goLeft;
-    public bool goLeftLeft;
-    public bool goLeftRight;
-
-    public bool goRight;
-    public bool goRightLeft;
-    public bool goRightRight;
-
-    public bool goUp;
-    public bool goUpUp;
-    public bool goUpDown;
-
-    public bool goDown;
-    public bool goDownUp;
-    public bool goDownDown;
 
     public Vector3 cameraPosition;
-    private int count = 0;
-
-    private float value1;
-    private float value2;
+    private bool isPlayer = false;
 
     public GameObject player;
 
     private areaPlayerScript areaPlayerScript;
-    private float areaHor;
-    private float areaHorMinus = 16;
-    private float areaVert;
-
+    void FixedUpdate()
+    {
+        if (!isPlayer)
+        {
+            check();
+        }
+    }
     // Start is called before the first frame update
-    void Start()
+    void Start() 
     {
         cameraPosition = Camera.main.transform.position;
         areaPlayerScript = FindObjectOfType<areaPlayerScript>();
-    }
-    //private void Update()
-    //{
-    //    areaHor = math.round(player.transform.position.x + 8);
-    //    if (areaHor > areaHorMinus)
-    //    {
-    //        areaHorMinus += 16;
-    //        transform.position = new Vector3(0f, 0.5f, cameraPosition.z);
-    //        value2 = 16f * math.round(player.transform.position.x) / 8;
-    //        transform.position = new Vector3(value2, value1, cameraPosition.z);
-    //    }
-//    }
-
-//Update is called once per frame
-    void FixedUpdate()
-    {
-        if (goLeft)
-        {
-            if (goLeftLeft && count == 0 && !goLeftRight)
-            {
-                count++;
-                changePosition("left");
-            }
-        }
-        if (goRight)
-        {
-            if (goRightRight && count == 0 && !goRightLeft)
-            {
-                count++;
-                changePosition("right");
-            }
-        }
-        if (goUp)
-        {
-            if (goUpUp && count == 0 && !goUpDown)
-            {
-               count++;
-               changePosition("up");
-            }
-        }
-        if (goDown)
-        {
-            if (goDownDown && count == 0 && !goDownUp)
-            {
-                count++;
-               changePosition("down");
-           }
-        }
-        if (!goDown && !goUp && !goRight && !goLeft)
-        {
-            count = 0;
-        }
     }
     public void changePosition(string whatDirection)
     {
@@ -96,44 +29,50 @@ public class moveCamera : MonoBehaviour
         switch (whatDirection)
         {
             case "left":
-                transform.position = new Vector3(cameraPosition.x - 16, cameraPosition.y, cameraPosition.z);
-                areaPlayerScript.locationChange("Left");
+                transform.position = new Vector3(cameraPosition.x - 16f, cameraPosition.y, cameraPosition.z);
                 break;
             case "right":
-                transform.position = new Vector3(cameraPosition.x + 16, cameraPosition.y, cameraPosition.z);
-                areaPlayerScript.locationChange("Right");
+                transform.position = new Vector3(cameraPosition.x + 16f, cameraPosition.y, cameraPosition.z);
                 break;
             case "up":
-                transform.position = new Vector3(cameraPosition.x, cameraPosition.y + 9, cameraPosition.z);
-                areaPlayerScript.locationChange("Up");
+                transform.position = new Vector3(cameraPosition.x, cameraPosition.y + 9f, cameraPosition.z);
                 break;
             case "down":
-                transform.position = new Vector3(cameraPosition.x, cameraPosition.y - 9, cameraPosition.z);
-                areaPlayerScript.locationChange("Down");
+                transform.position = new Vector3(cameraPosition.x, cameraPosition.y - 9f, cameraPosition.z);
                 break;
         }
-        Reset();
     }
-    public void Reset()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        goUp = false;
-        goDown = false;
-        goRight = false;
-        goLeft = false;
-        goUpUp = false;
-        goDownDown = false;
-        goRightRight = false;
-        goLeftLeft = false;
-        goUpDown = false;
-        goDownUp = false;
-        goRightLeft = false;
-        goLeftRight = false;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayer = true;
+        }
     }
-    public void resetAndMove(float upDown, float leftRight)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        transform.position = new Vector3(0f, 0.5f, cameraPosition.z);
-        value1 = 9f * upDown + 0.5f;
-        value2 = 16f * leftRight;
-        transform.position = new Vector3(value2, value1, cameraPosition.z);
-    } 
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayer = false;
+        }
+    }
+    void check()
+    {
+        if (this.transform.position.x - 8 > math.round(player.transform.position.x))
+        {
+            changePosition("left");
+        }
+        else if (this.transform.position.x + 8 < math.round(player.transform.position.x))
+        {
+            changePosition("right");
+        }
+        if (this.transform.position.y - 4.45f > math.round(player.transform.position.y))
+        {   
+            changePosition("down");
+        }
+        else if (this.transform.position.y + 4.55f < math.round(player.transform.position.y))
+        {
+            changePosition("up");
+        }
+    }
 }
