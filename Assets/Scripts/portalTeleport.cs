@@ -44,18 +44,31 @@ public class portalTeleport : MonoBehaviour
             {
                 velocity = -rb.velocity.y;
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                characterController.setVelocity(velocity);
+                characterController.setVelocityX(velocity);
             }
             if (otherPortal.GetComponent<portalTeleport>().isLeft && !ignoreSpeed)
             {
                 velocity = rb.velocity.y;
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                characterController.setVelocity(velocity);
+                characterController.setVelocityX(velocity);
             }
         }
         if (isDown)
         {
-            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y + 0.5f);
+            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y + 1f);
+            if (otherPortal.GetComponent<portalTeleport>().isRight && !ignoreSpeed)
+            {
+                velocity = rb.velocity.x;
+                Debug.Log(velocity);
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                characterController.setVelocityY(velocity);
+            }
+            if (otherPortal.GetComponent<portalTeleport>().isLeft && !ignoreSpeed)
+            {
+                velocity = rb.velocity.x;
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                characterController.setVelocityY(velocity);
+            }
         }
         if (isLeft)
         {

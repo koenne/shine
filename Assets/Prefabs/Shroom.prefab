@@ -296,9 +296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7438831768461103284}
-  jumpHeight: 0
   bounceSound: {fileID: 1280270427329254125}
   jumpForce: 4
+  isIdle: 0
 --- !u!50 &3767949102696944881
 Rigidbody2D:
   serializedVersion: 4

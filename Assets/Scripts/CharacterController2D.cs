@@ -19,7 +19,7 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 m_Velocity = Vector3.zero;
 	public NewPlayerMovement newPlayerMovement;
 	private Vector3 targetVelocity = new Vector2(0,0);
-	private float velocity = 0;
+	private float velocityX = 0;
 
     [Header("Events")]
 	[Space]
@@ -46,7 +46,7 @@ public class CharacterController2D : MonoBehaviour
             animatorControl.setJump2(false);
             newPlayerMovement.resetJump();
             jumpcount = 0;
-			velocity = 0;
+			velocityX = 0;
         }
 		else
 		{
@@ -87,7 +87,7 @@ public class CharacterController2D : MonoBehaviour
 			animatorControl.setRunning(true);
 			// Move the character by finding the target velocity
 			//Debug.Log(m_Rigidbody2D.velocity.x);
-            targetVelocity = new Vector2(velocity + move * 10f, m_Rigidbody2D.velocity.y);
+            targetVelocity = new Vector2(velocityX + move * 10f, m_Rigidbody2D.velocity.y);
 
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
@@ -159,9 +159,13 @@ public class CharacterController2D : MonoBehaviour
 		canJumpTwice = !canJumpTwice;
 	}
 
-	public void setVelocity(float newVelocity)
+	public void setVelocityY(float newVelocity)
 	{
-		Debug.Log(newVelocity);
-		velocity = newVelocity;
+		m_Rigidbody2D.AddForce(new Vector2(0, newVelocity * 30));
 	}
+    public void setVelocityX(float newVelocity)
+    {
+        //Debug.Log(newVelocity);
+        velocityX = newVelocity;
+    }
 }
