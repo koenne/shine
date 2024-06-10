@@ -26,7 +26,7 @@ public class playerCheckpointScript : MonoBehaviour
     }
     public void teleport()
     {
-        rb.position = savedPos;
+        rb.position = new Vector3(savedPos.x, savedPos.y + 0.5f, savedPos.z);
         rb.velocity = new Vector3(0, 0, 0);
         animator.SetBool("isDead", false);
     }

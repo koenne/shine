@@ -60,10 +60,10 @@ public class NewPlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (MovementAllowed(canMove, horizontalMove, playerRB))
+        if (MovementAllowed(canMove))
         {
             // Move our character
-            controller.Move(horizontalMove * Time.fixedDeltaTime, jump, jump2, MovementAllowed(canMove, horizontalMove, playerRB));
+            controller.Move(horizontalMove * Time.fixedDeltaTime, jump, jump2);
             jump = false;
             jump2 = false;
         }
@@ -83,21 +83,9 @@ public class NewPlayerMovement : MonoBehaviour
         SceneManager.LoadScene(currentSceneName);
     }
 
-    private bool MovementAllowed(bool canMove, float horizontalMove, Rigidbody2D playerRB)
+    private bool MovementAllowed(bool canMove)
     {
         if (!canMove) return false;
-        
-        //if velocity
-        if(Input.GetKey(KeyCode.D))
-        {
-            return (playerRB.velocity.x < horizontalMove);
-        }
-
-        if(Input.GetKey(KeyCode.A))
-        {
-            return (playerRB.velocity.x > horizontalMove);
-
-        }
         return true;
     }
 }

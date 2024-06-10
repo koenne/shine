@@ -9,7 +9,7 @@ public class blueWitchScript : MonoBehaviour
     public bossMusicScript bossMusic;
     private int timerInt = 0;
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (bossMusic.starting)
         {
