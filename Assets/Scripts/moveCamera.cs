@@ -58,11 +58,11 @@ public class moveCamera : MonoBehaviour
     }
     void check()
     {
-        if (this.transform.position.x - 8 > math.round(player.transform.position.x))
+        if (this.transform.position.x - 8 > player.transform.position.x)
         {
             changePosition("left");
         }
-        else if (this.transform.position.x + 8 < math.round(player.transform.position.x))
+        else if (this.transform.position.x + 8 < player.transform.position.x)
         {
             changePosition("right");
         }
