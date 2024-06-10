@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,10 +16,16 @@ public class NewPlayerMovement : MonoBehaviour
     int jumpcount;
     public GameObject menu;
     private bool menubool = false;
+    private Rigidbody2D playerRB;
 
+    private void Start()
+    {
+        playerRB = GetComponent<Rigidbody2D>();
+    }
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(playerRB.velocity.x);
         if (canMove)
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
@@ -53,10 +60,10 @@ public class NewPlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (canMove)
+        if (MovementAllowed(canMove, horizontalMove, playerRB))
         {
             // Move our character
-            controller.Move(horizontalMove * Time.fixedDeltaTime, jump, jump2);
+            controller.Move(horizontalMove * Time.fixedDeltaTime, jump, jump2, MovementAllowed(canMove, horizontalMove, playerRB));
             jump = false;
             jump2 = false;
         }
@@ -74,6 +81,23 @@ public class NewPlayerMovement : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
+    }
 
+    private bool MovementAllowed(bool canMove, float horizontalMove, Rigidbody2D playerRB)
+    {
+        if (!canMove) return false;
+        
+        //if velocity
+        if(Input.GetKey(KeyCode.D))
+        {
+            return (playerRB.velocity.x < horizontalMove);
+        }
+
+        if(Input.GetKey(KeyCode.A))
+        {
+            return (playerRB.velocity.x > horizontalMove);
+
+        }
+        return true;
     }
 }

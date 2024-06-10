@@ -18,8 +18,10 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 	public NewPlayerMovement newPlayerMovement;
+	private Vector3 targetVelocity = new Vector2(0,0);
+	private float velocity = 0;
 
-	[Header("Events")]
+    [Header("Events")]
 	[Space]
 
 	public UnityEvent OnLandEvent;
@@ -30,7 +32,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private void Awake()
 	{
-		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -44,6 +46,7 @@ public class CharacterController2D : MonoBehaviour
             animatorControl.setJump2(false);
             newPlayerMovement.resetJump();
             jumpcount = 0;
+			velocity = 0;
         }
 		else
 		{
@@ -76,16 +79,19 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool jump, bool jump2)
+	public void Move(float move, bool jump, bool jump2, bool canMove)
 	{
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
 			animatorControl.setRunning(true);
 			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
-			// And then smoothing it out and applying it to the character
-			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			//Debug.Log(m_Rigidbody2D.velocity.x);
+            targetVelocity = new Vector2(velocity + move * 10f, m_Rigidbody2D.velocity.y);
+
+            // And then smoothing it out and applying it to the character
+            m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+            //m_Rigidbody2D.velocity = new Vector3(targetVelocity.x, targetVelocity.y, 0);
 
 			// If the input is moving the player right and the player is facing left...
 			if (move > 0 && !m_FacingRight)
@@ -151,5 +157,11 @@ public class CharacterController2D : MonoBehaviour
 	public void doubleJumpActivate()
 	{
 		canJumpTwice = !canJumpTwice;
+	}
+
+	public void setVelocity(float newVelocity)
+	{
+		Debug.Log(newVelocity);
+		velocity = newVelocity;
 	}
 }
