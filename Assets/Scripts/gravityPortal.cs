@@ -28,14 +28,14 @@ public class gravityPortal : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if(isReverse && player.transform.localScale.y > 0)
+            if(isReverse && player.GetComponent<Rigidbody2D>().gravityScale != -1.5f)
             {
                 player.GetComponent<Rigidbody2D>().gravityScale = -1.5f;
                 animator.gravityChange(true);
                 groundCheckMove.changeGravity(true);
                 controller.changeJumpForce();
             }
-            else if(player.transform.localScale.y < 0)
+            else if(player.GetComponent<Rigidbody2D>().gravityScale != 1.5f && !isReverse)
             {
                 player.GetComponent<Rigidbody2D>().gravityScale = 1.5f;
                 animator.gravityChange(false);

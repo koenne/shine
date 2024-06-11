@@ -66,7 +66,7 @@ public class moveCamera : MonoBehaviour
         {
             changePosition("right");
         }
-        if (this.transform.position.y - 4.45f > math.round(player.transform.position.y))
+        if (this.transform.position.y - 4.5f > math.round(player.transform.position.y))
         {   
             changePosition("down");
         }
