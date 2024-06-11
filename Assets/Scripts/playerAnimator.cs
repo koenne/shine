@@ -96,4 +96,18 @@ public class playerAnimator : MonoBehaviour
             animator.SetBool("isJumping2", false);
         }
     }
+    public void gravityChange(bool reverse)
+    
+    {
+        Vector3 theScale = transform.localScale;
+        if (reverse)
+        {
+            theScale.y = -1;
+        }
+        else
+        {
+            theScale.y = 1;
+        }
+        transform.localScale = theScale;
+    }
 }

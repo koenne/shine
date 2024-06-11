@@ -168,4 +168,8 @@ public class CharacterController2D : MonoBehaviour
         //Debug.Log(newVelocity);
         velocityX = newVelocity;
     }
+	public void changeJumpForce()
+	{
+		m_JumpForce *= -1;
+	}
 }

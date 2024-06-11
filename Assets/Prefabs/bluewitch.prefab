@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3240726466817259840
 Transform:
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1075867848238978028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.43, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91,9 +91,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starting: 0
-  normaMusic: {fileID: 0}
-  bulletMusic: {fileID: 0}
+  normaMusic: {fileID: 6672664994778997536, guid: 95d656faba5e6bf41924396cbb8172db, type: 3}
+  bulletMusic: {fileID: 1471593518666088362, guid: 522e01fcaa4ba5343b1d8e26e789db03, type: 3}
   animator: {fileID: 6483345125830946032}
+  blueWitch: {fileID: 8380791086870430748}
+  normal: 0
+  boss: 0
+  volumeUp: 0
+  volumeDown: 0
 --- !u!1 &2875582352315327510
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,10 +111,10 @@ GameObject:
   - component: {fileID: 8380791086870430748}
   m_Layer: 0
   m_Name: fire
-  m_TagString: Untagged
+  m_TagString: Spikes
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8408938077702506206
 Transform:
@@ -139,12 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blueMagicBall: {fileID: 3131211345093820692, guid: d591c064bc22b3c4b82458251944fb6e, type: 3}
-  greenMagicBall: {fileID: 8668360324994198314, guid: e3df83872f28a314f9ba5bc9d29e0f36, type: 3}
   blueWitch: {fileID: 5431505797186451108}
-  dir: {x: 0, y: 0, z: 0}
-  amount1: 0
-  amount2: 0
-  amount3: 0
+  shootTimer: 2
   bullet: {fileID: 0}
   bossMusic: {fileID: 4849821002608829649}
 --- !u!1 &5431505797186451108
@@ -163,7 +164,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7161936747528002478
 Transform:
@@ -174,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 5431505797186451108}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.427574, y: -35.07132, z: 0}
+  m_LocalPosition: {x: 32.5, y: -34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

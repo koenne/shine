@@ -11,6 +11,8 @@ TagManager:
   - BlackFire
   - CameraTrigger
   - RedWitch
+  - BackgroundMusic
+  - BossMusic
   layers:
   - Default
   - TransparentFX
