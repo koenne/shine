@@ -117,10 +117,15 @@ public class bossMusicScript1 : MonoBehaviour
     }
     public void destroying()
     {
+        if (!dead)
+        {
+        starting = false;
         normal = true;
         boss = false;
-        dead = true;
         volumeUp = 0;
         volumeDown = 1;
+        dead = true;
+        }
+
     }
 }

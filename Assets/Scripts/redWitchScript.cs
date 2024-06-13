@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class redWitchScript : MonoBehaviour
@@ -12,10 +13,11 @@ public class redWitchScript : MonoBehaviour
     private GameObject bullet;
     public bossMusicScript1 bossMusic;
     public int damage = 3;
+    private bool isDead = false;
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (bossMusic.starting)
+        if (bossMusic.starting && !isDead)
         {
             shootTimer -= Time.deltaTime;
             if (shootTimer < 0)
@@ -26,9 +28,11 @@ public class redWitchScript : MonoBehaviour
         }
         if(damage == 0)
         {
+            isDead = true;
             bossMusic.destroying();
             Destroy(wall);
-            Destroy(gameObject);
+            gameObject.GetComponent<Renderer>().material.color = new Color(0,0,0,0);
+            Destroy(gameObject, 15f);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

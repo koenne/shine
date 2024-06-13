@@ -9,7 +9,7 @@ public class changeMusic : MonoBehaviour
     private int lastSong = 0;
     private int r = 0;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!audioSource.isPlaying || changeSong)
         {
