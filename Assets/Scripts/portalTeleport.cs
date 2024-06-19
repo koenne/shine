@@ -21,6 +21,7 @@ public class portalTeleport : MonoBehaviour
     private float velocity;
     private CharacterController2D characterController;
     public bool ignoreSpeed;
+    public float customUp = 0.25f;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class portalTeleport : MonoBehaviour
     {
         if(isUp)
         {
-            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y - 0.5f);
+            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y - customUp);
             if (otherPortal.GetComponent<portalTeleport>().isRight && !ignoreSpeed)
             {
                 velocity = -rb.velocity.y;
@@ -78,6 +79,7 @@ public class portalTeleport : MonoBehaviour
         {
             rb.position = new Vector2(otherPortal.transform.position.x - 0.5f, otherPortal.transform.position.y);
         }
+        rb.velocity = new Vector2 (rb.velocity.x, 0);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
