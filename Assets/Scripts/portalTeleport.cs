@@ -40,18 +40,18 @@ public class portalTeleport : MonoBehaviour
     {
         if(isUp)
         {
-            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y - customUp);
+            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y - 0.25f);
             if (otherPortal.GetComponent<portalTeleport>().isRight && !ignoreSpeed)
             {
                 velocity = -rb.velocity.y;
-                rb.velocity = new Vector2(rb.velocity.x, 0);
                 characterController.setVelocityX(velocity);
+                rb.velocity = new Vector2(rb.velocity.x, 0);
             }
             if (otherPortal.GetComponent<portalTeleport>().isLeft && !ignoreSpeed)
             {
                 velocity = rb.velocity.y;
-                rb.velocity = new Vector2(rb.velocity.x, 0);
                 characterController.setVelocityX(velocity);
+                rb.velocity = new Vector2(rb.velocity.x, 0);
             }
         }
         if (isDown)
@@ -79,7 +79,6 @@ public class portalTeleport : MonoBehaviour
         {
             rb.position = new Vector2(otherPortal.transform.position.x - 0.5f, otherPortal.transform.position.y);
         }
-        rb.velocity = new Vector2 (rb.velocity.x, 0);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
