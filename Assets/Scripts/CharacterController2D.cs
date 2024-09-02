@@ -20,6 +20,9 @@ public class CharacterController2D : MonoBehaviour
 	public NewPlayerMovement newPlayerMovement;
 	private Vector3 targetVelocity = new Vector2(0,0);
 	private float velocityX = 0;
+	public bool isGravityReversed = false;
+	private playerAnimator animator;
+	private groundCheckMove groundCheckMove;
 
     [Header("Events")]
 	[Space]
@@ -33,8 +36,10 @@ public class CharacterController2D : MonoBehaviour
 	private void Awake()
 	{
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = FindObjectOfType<playerAnimator>();
+        groundCheckMove = FindObjectOfType<groundCheckMove>();
 
-		if (OnLandEvent == null)
+        if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 	}
     private void Update()
@@ -172,4 +177,23 @@ public class CharacterController2D : MonoBehaviour
 	{
 		m_JumpForce *= -1;
 	}
+	public void GravityChange(bool isReverse)
+	{
+        if (isReverse && GetComponent<Rigidbody2D>().gravityScale != -1.5f)
+        {
+            GetComponent<Rigidbody2D>().gravityScale = -1.5f;
+            animator.gravityChange(true);
+            groundCheckMove.changeGravity(true);
+            changeJumpForce();
+            isGravityReversed = true;
+        }
+        else if (GetComponent<Rigidbody2D>().gravityScale != 1.5f && !isReverse)
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 1.5f;
+            animator.gravityChange(false);
+            groundCheckMove.changeGravity(false);
+            changeJumpForce();
+            isGravityReversed = false;
+        }
+    }
 }

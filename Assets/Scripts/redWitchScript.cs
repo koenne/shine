@@ -22,7 +22,7 @@ public class redWitchScript : MonoBehaviour
             shootTimer -= Time.deltaTime;
             if (shootTimer < 0)
             {
-                shootTimer = 1;
+                shootTimer = 0.75f;
                 bullet = (GameObject)GameObject.Instantiate(blueMagicBall, transform.position + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)), transform.rotation);
             }
         }

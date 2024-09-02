@@ -60,7 +60,6 @@ public class portalTeleport : MonoBehaviour
             if (otherPortal.GetComponent<portalTeleport>().isRight && !ignoreSpeed)
             {
                 velocity = rb.velocity.x;
-                Debug.Log(velocity);
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 characterController.setVelocityY(velocity);
             }
