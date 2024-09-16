@@ -8,7 +8,13 @@ public class changeMusic : MonoBehaviour
     public bool changeSong = true;
     private int lastSong = 0;
     private int r = 0;
-    // Update is called once per frame
+    private void Start()
+    {
+        foreach (AudioClip clip in audioClips)
+        {
+            clip.LoadAudioData();
+        }
+    }
     void FixedUpdate()
     {
         if (!audioSource.isPlaying || changeSong)

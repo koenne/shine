@@ -56,5 +56,7 @@ public class playerSpikes : MonoBehaviour
         isDead = true;
         NewPlayerMovement.died(false);
         deathSound.Play();
+        deathcount++;
+        text.text = "Deaths: " + deathcount;
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class blueWitchScript : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class blueWitchScript : MonoBehaviour
     public GameObject bullet;
     public bossMusicScript bossMusic;
     private int timerInt = 0;
+
     // Update is called once per frame
     void FixedUpdate()
     {
