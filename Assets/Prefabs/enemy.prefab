@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1881389659
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1731259890, guid: 1dfd986965019a5429e794e10a397328, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -319,5 +319,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyScript: {fileID: 4185277541027790069}
   shroomScript: {fileID: 6211878590893134142, guid: b2d528aa5a76875469aa3d8f769ae33d, type: 3}
-  isEnemy: 1
+  isEnemy: 0
   isShroom: 0

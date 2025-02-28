@@ -13,6 +13,7 @@ TagManager:
   - RedWitch
   - BackgroundMusic
   - BossMusic
+  - Planet
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - Checkpoint
   - RedWitch
   - Camera
-  - 
-  - 
+  - Ice
+  - Planet
   - 
   - 
   - 

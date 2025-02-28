@@ -50,7 +50,6 @@ public class CharacterController2D : MonoBehaviour
             animatorControl.setJumping(false);
             animatorControl.setJump2(false);
             newPlayerMovement.resetJump();
-            jumpcount = 0;
 			velocityX = 0;
         }
 		else
@@ -61,7 +60,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
 	{
-		bool wasGrounded = m_Grounded;
+        bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
@@ -84,72 +83,80 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool jump, bool jump2)
-	{
-		//only control the player if grounded or airControl is turned on
-		if (m_Grounded || m_AirControl)
-		{
-			animatorControl.setRunning(true);
-			// Move the character by finding the target velocity
-			//Debug.Log(m_Rigidbody2D.velocity.x);
-            targetVelocity = new Vector2(velocityX + move * 10f, m_Rigidbody2D.velocity.y);
+    public void Move(float move, bool jump, bool jump2)
+    {
+        // Only control the player if grounded or airControl is turned on
+        if (m_Grounded || m_AirControl)
+        {
+            animatorControl.setRunning(true);
 
-            // And then smoothing it out and applying it to the character
+            // Move the character in the direction they are facing
+            Vector2 moveDirection = transform.right * move * 10f; // Forward direction
+            targetVelocity = new Vector2(moveDirection.x + velocityX, m_Rigidbody2D.velocity.y);
+
+            // Smooth movement
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
-            //m_Rigidbody2D.velocity = new Vector3(targetVelocity.x, targetVelocity.y, 0);
 
-			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
-			}
-			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
-			}
-		}
-		else
-		{
-			animatorControl.setRunning(false);
-		}
-		// If the player should jump...
-		if (jump)
-		{
-			// Add a vertical force to the player.
-			if(canJumpTwice && jumpcount < 1)
-			{
-				if(jump2 || jumpcount == 0)
-				{
+            // Flip logic if you're still handling facing manually
+            if (move > 0 && !m_FacingRight)
+            {
+                Flip();
+            }
+            else if (move < 0 && m_FacingRight)
+            {
+                Flip();
+            }
+        }
+        else
+        {
+            animatorControl.setRunning(false);
+        }
+
+        // Jump Logic
+        if (jump)
+        {
+            if (canJumpTwice)
+            {
+                if (m_Grounded)
+                {
+                    jumpcount = 0;
+                }
+                if (jumpcount == 0)
+                {
+                    Debug.Log("jump one");
                     animatorControl.setFall(false);
-					animatorControl.setJump2(true);
-					m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
-                    m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-                }
-				else
-				{
-                    m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                    animatorControl.setJump2(true);
+                    m_Rigidbody2D.AddForce(transform.up * m_JumpForce, ForceMode2D.Impulse); // Apply jump force relative to player's rotation
                     m_Grounded = false;
+                    jumpSound.Play();
+                    animatorControl.setJumping(true);
                 }
-                jumpSound.Play();
-                animatorControl.setJumping(true);
+                else if (jumpcount == 1)
+                {
+                    Debug.Log("jump two");
+                    m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0); ; // Reset vertical velocity before jumping
+                    m_Rigidbody2D.AddForce(transform.up * m_JumpForce, ForceMode2D.Impulse);
+                    m_Grounded = false;
+                    jumpSound.Play();
+                    animatorControl.setJumping(true);
+                }
                 jumpcount++;
             }
-			else if(m_Grounded)
-			{
+            else if (m_Grounded)
+            {
+                Debug.Log("Only Jump");
                 jumpSound.Play();
                 animatorControl.setJumping(true);
-                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                m_Rigidbody2D.AddForce(transform.up * m_JumpForce, ForceMode2D.Impulse); // Relative jump force
                 m_Grounded = false;
             }
+        }
+    }
 
-		}
-	}
 
 
-	private void Flip()
+
+    private void Flip()
 	{
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;

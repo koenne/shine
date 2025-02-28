@@ -22,6 +22,7 @@ public class portalTeleport : MonoBehaviour
     private CharacterController2D characterController;
     public bool ignoreSpeed;
     public float customUp = 0.25f;
+    public bool hasTeleported = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,8 +84,19 @@ public class portalTeleport : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            teleportSound.Play();
-            teleport();
+            if (!hasTeleported && !portal.hasTeleported)
+            {
+                teleportSound.Play();
+                teleport();
+                portal.hasTeleported = true;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            portal.hasTeleported = false;
         }
     }
 }
