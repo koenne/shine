@@ -8,9 +8,7 @@ public class moveCamera : MonoBehaviour
     private bool isPlayer = false;
 
     public GameObject player;
-
-    private areaPlayerScript areaPlayerScript;
-    void FixedUpdate()
+    void Update()
     {
         if (!isPlayer)
         {
@@ -21,7 +19,6 @@ public class moveCamera : MonoBehaviour
     void Start() 
     {
         cameraPosition = Camera.main.transform.position;
-        areaPlayerScript = FindObjectOfType<areaPlayerScript>();
     }
     public void changePosition(string whatDirection)
     {

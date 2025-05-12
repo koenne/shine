@@ -6,11 +6,9 @@ public class areaPlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     public Transform cameraPos;
     public bool startingTeleportYes;
-    private moveCamera moveCamera;
     // Start is called before the first frame update
     void Start()
     {
-        moveCamera = FindObjectOfType<moveCamera>();
         rb = GetComponent<Rigidbody2D>();
         if (startingTeleportYes)
         {

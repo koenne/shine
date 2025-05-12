@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3583050868620552045}
   - component: {fileID: 803697431270977471}
   - component: {fileID: 5382301973231000457}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: blackFire
   m_TagString: BlackFire
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7751557935076110612}
   - component: {fileID: 738312629559279319}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

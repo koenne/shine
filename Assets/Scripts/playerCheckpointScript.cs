@@ -15,7 +15,7 @@ public class playerCheckpointScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        characterController = FindAnyObjectByType<CharacterController2D>();
+        characterController = GetComponent<CharacterController2D>();
     }
 
     // Update is called once per frame

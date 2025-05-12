@@ -39,6 +39,10 @@ public class portalTeleport : MonoBehaviour
     }
     public void teleport()
     {
+        if(!isUp && !isDown && !isLeft && !isRight)
+        {
+            rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y);
+        }
         if(isUp)
         {
             rb.position = new Vector2(otherPortal.transform.position.x, otherPortal.transform.position.y - 0.25f);
@@ -82,14 +86,11 @@ public class portalTeleport : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !portal.hasTeleported)
         {
-            if (!hasTeleported && !portal.hasTeleported)
-            {
-                teleportSound.Play();
-                teleport();
-                portal.hasTeleported = true;
-            }
+            teleportSound.Play();
+            teleport();
+            hasTeleported = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

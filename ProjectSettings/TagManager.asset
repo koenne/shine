@@ -57,6 +57,15 @@ TagManager:
   - name: Background1
     uniqueID: 101748803
     locked: 0
+  - name: Background0
+    uniqueID: 375346219
+    locked: 0
   - name: Ground
     uniqueID: 1881389659
+    locked: 0
+  - name: Collectables
+    uniqueID: 3033885981
+    locked: 0
+  - name: Player
+    uniqueID: 3746853005
     locked: 0

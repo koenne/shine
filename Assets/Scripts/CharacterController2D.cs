@@ -23,6 +23,7 @@ public class CharacterController2D : MonoBehaviour
 	public bool isGravityReversed = false;
 	private playerAnimator animator;
 	private groundCheckMove groundCheckMove;
+    private bool hasDoubleJumped = false;
 
     [Header("Events")]
 	[Space]
@@ -44,15 +45,36 @@ public class CharacterController2D : MonoBehaviour
 	}
     private void Update()
     {
-		if (m_Grounded)
-		{
+        bool wasGrounded = m_Grounded;
+        m_Grounded = false;
+
+        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+
+                m_Grounded = true;
+                //jumpcount = 0;
+                if (!wasGrounded)
+                {
+                    OnLandEvent.Invoke();
+                }
+
+
+            }
+        }
+        if (m_Grounded)
+        {
+            hasDoubleJumped = false; // Reset double jump state
             animatorControl.setFall(false);
             animatorControl.setJumping(false);
             animatorControl.setJump2(false);
-            newPlayerMovement.resetJump();
-			velocityX = 0;
+            velocityX = 0;
         }
-		else
+        else
 		{
             animatorControl.setFall(true);
         }
@@ -60,30 +82,11 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
 	{
-        bool wasGrounded = m_Grounded;
-		m_Grounded = false;
 
-		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			if (colliders[i].gameObject != gameObject)
-			{
-
-                m_Grounded = true;
-                if (!wasGrounded)
-				{
-					OnLandEvent.Invoke();
-				}
-
-
-            }
-		}
 	}
 
 
-    public void Move(float move, bool jump, bool jump2)
+    public void Move(float move, bool jump)
     {
         // Only control the player if grounded or airControl is turned on
         if (m_Grounded || m_AirControl)
@@ -115,45 +118,29 @@ public class CharacterController2D : MonoBehaviour
         // Jump Logic
         if (jump)
         {
-            if (canJumpTwice)
+            if (jump)
             {
                 if (m_Grounded)
                 {
-                    jumpcount = 0;
+                    PerformJump(); //  Ground jump
                 }
-                if (jumpcount == 0)
+                else if (canJumpTwice && !hasDoubleJumped)
                 {
-                    Debug.Log("jump one");
-                    animatorControl.setFall(false);
-                    animatorControl.setJump2(true);
-                    m_Rigidbody2D.AddForce(transform.up * m_JumpForce, ForceMode2D.Impulse); // Apply jump force relative to player's rotation
-                    m_Grounded = false;
-                    jumpSound.Play();
-                    animatorControl.setJumping(true);
+                    hasDoubleJumped = true;
+                    PerformJump(); //  Air jump
                 }
-                else if (jumpcount == 1)
-                {
-                    Debug.Log("jump two");
-                    m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0); ; // Reset vertical velocity before jumping
-                    m_Rigidbody2D.AddForce(transform.up * m_JumpForce, ForceMode2D.Impulse);
-                    m_Grounded = false;
-                    jumpSound.Play();
-                    animatorControl.setJumping(true);
-                }
-                jumpcount++;
-            }
-            else if (m_Grounded)
-            {
-                Debug.Log("Only Jump");
-                jumpSound.Play();
-                animatorControl.setJumping(true);
-                m_Rigidbody2D.AddForce(transform.up * m_JumpForce, ForceMode2D.Impulse); // Relative jump force
-                m_Grounded = false;
             }
         }
     }
 
-
+    private void PerformJump()
+    {
+        m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
+        m_Rigidbody2D.AddForce(transform.up * m_JumpForce, ForceMode2D.Impulse);
+        jumpSound.Play();
+        animatorControl.setJumping(true);
+        m_Grounded = false;
+    }
 
 
     private void Flip()
