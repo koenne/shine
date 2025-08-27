@@ -11,6 +11,7 @@ public class NewPlayerMovement : MonoBehaviour
 
     float horizontalMove = 0f;
     public bool jump = false;
+    public bool dash = false;
     public bool canMove = true;
     public GameObject menu;
     private bool menubool = false;
@@ -31,6 +32,14 @@ public class NewPlayerMovement : MonoBehaviour
             {
                 jump = true;
             }
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                dash = true;
+            }
+            else
+            {
+                dash = false;
+            }
         }
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -46,6 +55,7 @@ public class NewPlayerMovement : MonoBehaviour
             }
         }
 
+
     }
 
     void FixedUpdate()
@@ -53,7 +63,7 @@ public class NewPlayerMovement : MonoBehaviour
         if (MovementAllowed(canMove))
         {
             // Move our character
-            controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
+            controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
             jump = false;
         }
 

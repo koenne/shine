@@ -18,6 +18,11 @@ public class EnemyScript : MonoBehaviour
         Flip();
         animator.gameObject.GetComponent<Animator>().enabled = false;
     }
+    private void FixedUpdate()
+    {
+        count += Time.deltaTime;
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Spikes"))
@@ -35,7 +40,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("CameraTrigger"))
         {
             animator.gameObject.GetComponent<Animator>().enabled = true;
-            rb.transform.position = startPos;
+            //rb.transform.position = startPos;
         }
     }
     private void Flip()
@@ -66,7 +71,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("CameraTrigger"))
         {
-            rb.velocity = Vector3.zero;
+            //rb.velocity = Vector3.zero;
             animator.gameObject.GetComponent<Animator>().enabled = false;
         }
     }

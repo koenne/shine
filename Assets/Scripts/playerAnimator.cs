@@ -110,4 +110,15 @@ public class playerAnimator : MonoBehaviour
         }
         transform.localScale = theScale;
     }
+    public void setDash(bool yesNo)
+    {
+        if (yesNo)
+        {
+            animator.SetBool("isDashing", true);
+        }
+        else
+        {
+            animator.SetBool("isDashing", false);
+        }
+    }
 }

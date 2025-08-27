@@ -3,42 +3,57 @@ using UnityEngine;
 
 public class moveCamera : MonoBehaviour
 {
-
     public Vector3 cameraPosition;
     private bool isPlayer = false;
 
     public GameObject player;
+    private Camera _camera;
+    public float size;
+    public float smoothSpeed = 5f;
+    public float zoomSpeed;
+
+    private Vector3 targetPosition;
+    private float horizontalCheck;
+    private float verticalCheck;
+
+    void Start()
+    {
+        _camera = GetComponent<Camera>();
+        horizontalCheck = (size / 0.28125f);
+        verticalCheck = (size / 0.5f);
+        targetPosition = transform.position;
+    }
+
     void Update()
     {
         if (!isPlayer)
         {
             check();
         }
+
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+        _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, size, zoomSpeed * Time.deltaTime);
     }
-    // Start is called before the first frame update
-    void Start() 
-    {
-        cameraPosition = Camera.main.transform.position;
-    }
+
     public void changePosition(string whatDirection)
     {
-        cameraPosition = Camera.main.transform.position;
         switch (whatDirection)
         {
             case "left":
-                transform.position = new Vector3(cameraPosition.x - 16f, cameraPosition.y, cameraPosition.z);
+                targetPosition = new Vector3(targetPosition.x - horizontalCheck, targetPosition.y, targetPosition.z);
                 break;
             case "right":
-                transform.position = new Vector3(cameraPosition.x + 16f, cameraPosition.y, cameraPosition.z);
+                targetPosition = new Vector3(targetPosition.x + horizontalCheck, targetPosition.y, targetPosition.z);
                 break;
             case "up":
-                transform.position = new Vector3(cameraPosition.x, cameraPosition.y + 9f, cameraPosition.z);
+                targetPosition = new Vector3(targetPosition.x, targetPosition.y + verticalCheck, targetPosition.z);
                 break;
             case "down":
-                transform.position = new Vector3(cameraPosition.x, cameraPosition.y - 9f, cameraPosition.z);
+                targetPosition = new Vector3(targetPosition.x, targetPosition.y - verticalCheck, targetPosition.z);
                 break;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -46,6 +61,7 @@ public class moveCamera : MonoBehaviour
             isPlayer = true;
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -53,21 +69,28 @@ public class moveCamera : MonoBehaviour
             isPlayer = false;
         }
     }
-    void check()
+
+    public void check()
     {
-        if (this.transform.position.x - 8 > player.transform.position.x)
+        float zoneWidth = size / 0.5625f;
+        float zoneHeight = size;
+
+        if (targetPosition.x - zoneWidth > player.transform.position.x)
         {
             changePosition("left");
         }
-        else if (this.transform.position.x + 8 < player.transform.position.x)
+        else if (targetPosition.x + zoneWidth < player.transform.position.x)
         {
             changePosition("right");
         }
-        if (this.transform.position.y - 4.5f > math.round(player.transform.position.y))
-        {   
+
+        float buffer = 0.25f; // Tweak to taste
+
+        if (targetPosition.y - zoneHeight - buffer > player.transform.position.y)
+        {
             changePosition("down");
         }
-        else if (this.transform.position.y + 4.55f < math.round(player.transform.position.y))
+        else if (targetPosition.y + zoneHeight + buffer < player.transform.position.y)
         {
             changePosition("up");
         }

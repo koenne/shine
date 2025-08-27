@@ -24,6 +24,18 @@ public class CharacterController2D : MonoBehaviour
 	private playerAnimator animator;
 	private groundCheckMove groundCheckMove;
     private bool hasDoubleJumped = false;
+    public bool hasDash;
+
+    // Dash variables
+    [SerializeField] private float dashSpeed = 20f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 1f;
+
+    private bool isDashing = false;
+    private float dashTimeLeft;
+    private float lastDashTime = -Mathf.Infinity;
+    private int dashDirection = 0;
+    private bool canDashAgain;
 
     [Header("Events")]
 	[Space]
@@ -57,6 +69,7 @@ public class CharacterController2D : MonoBehaviour
             {
 
                 m_Grounded = true;
+                canDashAgain = true;
                 //jumpcount = 0;
                 if (!wasGrounded)
                 {
@@ -72,6 +85,7 @@ public class CharacterController2D : MonoBehaviour
             animatorControl.setFall(false);
             animatorControl.setJumping(false);
             animatorControl.setJump2(false);
+            animatorControl.setDash(false);
             velocityX = 0;
         }
         else
@@ -81,15 +95,30 @@ public class CharacterController2D : MonoBehaviour
     }
 
     private void FixedUpdate()
-	{
+    {
+        if (isDashing)
+        {
+            m_Rigidbody2D.velocity = new Vector2(dashDirection * dashSpeed, 0f);
+            dashTimeLeft -= Time.fixedDeltaTime;
 
-	}
+            if (dashTimeLeft <= 0f)
+            {
+                isDashing = false;
+            }
+            if (!newPlayerMovement.dash)
+            {
+                isDashing = false;
+            }
+            return; // Skip normal movement while dashing
+        }
+    }
 
 
-    public void Move(float move, bool jump)
+
+    public void Move(float move, bool jump, bool dash)
     {
         // Only control the player if grounded or airControl is turned on
-        if (m_Grounded || m_AirControl)
+        if ((m_Grounded || m_AirControl) && !isDashing)
         {
             animatorControl.setRunning(true);
 
@@ -118,8 +147,6 @@ public class CharacterController2D : MonoBehaviour
         // Jump Logic
         if (jump)
         {
-            if (jump)
-            {
                 if (m_Grounded)
                 {
                     PerformJump(); //  Ground jump
@@ -129,7 +156,15 @@ public class CharacterController2D : MonoBehaviour
                     hasDoubleJumped = true;
                     PerformJump(); //  Air jump
                 }
-            }
+        }
+        if (dash && !isDashing && Time.time >= lastDashTime + dashCooldown && hasDash && !m_Grounded && canDashAgain)
+        {
+            canDashAgain = false;
+            isDashing = true;
+            dashTimeLeft = dashDuration;
+            lastDashTime = Time.time;
+            dashDirection = m_FacingRight ? 1 : -1;
+            animatorControl.setDash(true);
         }
     }
 
