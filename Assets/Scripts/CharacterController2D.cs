@@ -24,7 +24,7 @@ public class CharacterController2D : MonoBehaviour
 	private playerAnimator animator;
 	private groundCheckMove groundCheckMove;
     private bool hasDoubleJumped = false;
-    public bool hasDash;
+    public bool hasDash; //Haha
 
     // Dash variables
     [SerializeField] private float dashSpeed = 20f;
